@@ -1,0 +1,15 @@
+{
+  "logo": {
+    "type": "file",
+    "source": "~/.config/fastfetch/logo.txt",
+    "padding": { "top": 2 }
+  },
+  "modules": [
+    "os",
+    "kernel",
+    "uptime",
+    "wm",
+    "memory",
+    { "type": "custom", "format": "{#keys}keep it simple, say." }
+  ]
+}

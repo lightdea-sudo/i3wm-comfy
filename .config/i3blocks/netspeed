@@ -1,0 +1,17 @@
+#!/bin/sh
+IF=$(ip route show default 2>/dev/null | awk '{for(i=1;i<NF;i++) if($i=="dev"){print $(i+1); exit}}')
+S="$HOME/.cache/netspeed_state"
+NOW=$(date +%s)
+if [ -z "$IF" ] || [ ! -r "/sys/class/net/$IF/statistics/rx_bytes" ]; then
+  echo "0.0 mbps"; exit 0
+fi
+RX=$(cat /sys/class/net/$IF/statistics/rx_bytes)
+if [ -f "$S" ]; then
+  read T0 RX0 TX0 IF0 < "$S"
+else
+  T0=$NOW; RX0=$RX; IF0=$IF
+fi
+echo "$NOW $RX 0 $IF" > "$S"
+DT=$((NOW - T0)); [ "$DT" -lt 1 ] && DT=1
+[ "$IF" != "$IF0" ] && RX0=$RX
+awk -v rx=$((RX-RX0)) -v dt=$DT 'BEGIN{ printf "%.1f mbps\n", rx*8/dt/1000000 }'

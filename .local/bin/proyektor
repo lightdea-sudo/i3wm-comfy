@@ -1,0 +1,10 @@
+#!/bin/sh
+INT=$(xrandr | awk '/ connected primary/{print $1; exit}')
+[ -z "$INT" ] && INT=$(xrandr | awk '/ connected/{print $1; exit}')
+EXT=$(xrandr | awk '/ connected/{print $1}' | grep -v "^$INT$" | head -n1)
+[ -z "$EXT" ] && { notify-send "Proyektor" "Tidak terdeteksi" 2>/dev/null; exit 1; }
+case "$1" in
+  mirror) xrandr --output "$EXT" --auto --same-as "$INT" ;;
+  extend) xrandr --output "$EXT" --auto --right-of "$INT" ;;
+  off)    xrandr --output "$EXT" --off --output "$INT" --auto ;;
+esac

@@ -1,0 +1,6 @@
+#!/bin/sh
+case "$BLOCK_BUTTON" in
+  4) brightnessctl -q set +5% ;;
+  5) brightnessctl -q set 5%- ;;
+esac
+echo "bright $(brightnessctl -m | cut -d, -f4)"

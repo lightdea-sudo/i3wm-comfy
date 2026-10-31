@@ -1,0 +1,9 @@
+#!/bin/sh
+A=$(ip -6 addr show scope global 2>/dev/null | awk '/inet6/{print $2; exit}')
+if [ -n "$A" ]; then
+  echo "IPv6: <span foreground=\"#6fb5a8\">${A%/*}</span>"
+  echo "IPv6"
+else
+  echo "no IPv6"
+  echo "no IPv6"
+fi

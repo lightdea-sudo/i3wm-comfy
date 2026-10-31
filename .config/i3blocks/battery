@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "bat $(acpi -b | head -n1 | grep -o '[0-9]*%')"

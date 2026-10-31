@@ -1,0 +1,37 @@
+separator_block_width=15
+markup=none
+
+[ipv6]
+command=$HOME/.config/i3blocks/ipv6
+interval=30
+markup=pango
+
+[netspeed]
+command=$HOME/.config/i3blocks/netspeed
+interval=2
+
+[tint]
+command=$HOME/.config/i3blocks/tint
+interval=once
+
+[battery]
+command=$HOME/.config/i3blocks/battery
+interval=30
+
+[brightness]
+command=$HOME/.config/i3blocks/brightness
+interval=once
+signal=10
+
+[volume]
+command=$HOME/.config/i3blocks/volume
+interval=5
+signal=11
+
+[memory]
+command=free -h | awk '/^Mem/{print "mem " $3}'
+interval=10
+
+[time]
+command=date '+%Y-%m-%d %H:%M'
+interval=30

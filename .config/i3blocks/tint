@@ -1,0 +1,11 @@
+#!/bin/sh
+S="$HOME/.cache/redshift_state"
+[ -f "$S" ] || echo on > "$S"
+if [ "$BLOCK_BUTTON" = 1 ]; then
+  if [ "$(cat "$S")" = on ]; then
+    redshift -x; echo off > "$S"
+  else
+    redshift -P -O 6500 -g 0.81:1.0:0.81; echo on > "$S"
+  fi
+fi
+[ "$(cat "$S")" = on ] && echo "tint on" || echo "tint off"
